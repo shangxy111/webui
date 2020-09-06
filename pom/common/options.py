@@ -20,7 +20,7 @@ class Options:
         options.add_experimental_option("prefs", prefs)
 
         # 无头模式： 启动浏览器进程，但是不会显示出来
-        #options.add_argument('--headless')
+        options.add_argument('--headless')
         # 去掉 EGL-ERROR信息提示
         options.add_argument('--disable-gpu')
 
