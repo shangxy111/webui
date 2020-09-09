@@ -38,7 +38,7 @@ class CasesUnit(unittest.TestCase):
         2. 将这个driver传到第二个页面，执行登录后才能执行的操作
     '''
     # 用例流程一：登录
-    @data(['jade008', '123456'])
+    @data(['jade', 'jade620595'])
     @unpack
     @BeautifulReport.add_test_img('test_1_error')
     def test_1(self, username, pwd):
@@ -62,37 +62,40 @@ class CasesUnit(unittest.TestCase):
     #用例流程二:登录(用户不存在去注册)-商品搜索-商品详情(加入购物车)-购物车结算
     @file_data('../common/data.yaml')
     @unpack
-    @BeautifulReport.add_test_img('test_3')
     def test_3(self, **kwargs):
-        # 用户登录
-        lp = LoginPage(self.driver, LoginPage.url)
-        login = lp.test_login(kwargs['username'], kwargs['pwd'])
-        # 用户存在，直接登录
-        if login:
-            pass
-        # 用户不存在，需要注册
-        else:
-            # 先进行注册
-            rp = RegisterPage(self.driver, RegisterPage.url)
-            rp.test_register(kwargs['username'], kwargs['pwd'])
-        # 商品搜索
-        sp = SearchPage(self.driver, SearchPage.url)
-        # 3-断言：搜索
-        searchFlg = sp.test_search(kwargs['productName'])
-        self.assertTrue(searchFlg)
+        try:
+            # 用户登录
+            lp = LoginPage(self.driver, LoginPage.url)
+            login = lp.test_login(kwargs['username'], kwargs['pwd'])
+            # 用户存在，直接登录
+            if login:
+                pass
+            # 用户不存在，需要注册
+            else:
+                # 先进行注册
+                rp = RegisterPage(self.driver, RegisterPage.url)
+                rp.test_register(kwargs['username'], kwargs['pwd'])
+            # 商品搜索
+            sp = SearchPage(self.driver, SearchPage.url)
+            # 3-断言：搜索
+            searchFlg = sp.test_search(kwargs['productName'])
+            self.assertTrue(searchFlg)
 
-        # 商品详情
-        pp = PrdDetailPage(self.driver, sp.getProductId())
-        # 产品详情添加商品、加入购物车
-        addFlg = pp.test_prdDetail()
-        self.assertTrue(addFlg)
+            # 商品详情
+            pp = PrdDetailPage(self.driver, sp.getProductId())
+            # 产品详情添加商品、加入购物车
+            addFlg = pp.test_prdDetail()
+            self.assertTrue(addFlg)
 
-        # 购物车页面
-        scp = ShopCartPage(self.driver, ShopCartPage.url)
-        # 购物车页面进行修改删除商品
-        calcFlg = scp.test_shopCart(kwargs['productNum'])
-        # 5-断言：购物车商品结算跳转
-        self.assertTrue(calcFlg, msg='购物车流程失败')
+            # 购物车页面
+            scp = ShopCartPage(self.driver, ShopCartPage.url)
+            # 购物车页面进行修改删除商品
+            calcFlg = scp.test_shopCart(kwargs['productNum'])
+            # 5-断言：购物车商品结算跳转
+            self.assertTrue(calcFlg, msg='购物车流程失败')
+        except Exception:
+            #失败截图保存
+            self.save_error()
 
     # BeautifulReport失败截图默认在save_img方法中
     def save_img(self, testMethod):
