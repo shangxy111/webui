@@ -62,7 +62,7 @@ class CasesUnit(unittest.TestCase):
     #用例流程二:登录(用户不存在去注册)-商品搜索-商品详情(加入购物车)-购物车结算
     @file_data('../common/data.yaml')
     @unpack
-    @BeautifulReport.add_test_img('test_3_error')
+    @BeautifulReport.add_test_img('test_3')
     def test_3(self, **kwargs):
         # 用户登录
         lp = LoginPage(self.driver, LoginPage.url)
