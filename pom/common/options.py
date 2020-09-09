@@ -25,7 +25,7 @@ class Options:
         # 无头模式： 启动浏览器进程，但是不会显示出来
         options.add_argument('--headless')
         # 无头模式下窗体最大化(设置窗体的分辨率，无头模式下出错通过截图来定位问题)
-        options.add_argument('--window-size=1366,768')
+        options.add_argument('--window-size=1920,1080')
         # 去掉 EGL-ERROR信息提示
         options.add_argument('--disable-gpu')
 
