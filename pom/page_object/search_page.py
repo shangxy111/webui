@@ -1,5 +1,5 @@
 # _*_ coding:utf-8 _*-
-# 作者：shangxiaoyu
+# 作者：shangxy
 # @Time : 2020/7/8 21:43
 
 #搜索页面
@@ -48,9 +48,13 @@ class SearchPage(BasePage):
 
     # 调试函数
     def test_search(self, prdName):
+        #打开搜索页
         self.visit()
+        #输入产品名称
         self.input_product(prdName)
+        #点击搜索按钮
         self.click_search()
+        #返回断言
         return self.assert_ele(prdName)
 
 

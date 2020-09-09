@@ -45,9 +45,9 @@ class StmpMail() :
         try:
             my_sender = "xxx@qq.com"  # 发件人
             recevier = "xxx@qq.com"  # 收件人
-            to_acc = 'xxx@163.com'  # 抄送人
-            message["From"] = formataddr(['小鱼', my_sender])
-            message["To"] = formataddr(['么么遥', recevier])
+            to_acc = 'shangxiaoyu736@163.com'  # 抄送人
+            message["From"] = formataddr(['xxx', my_sender])
+            message["To"] = formataddr(['xxx', recevier])
             message["Cc"] = to_acc
             message["Subject"] = Header('邮件主题', 'utf-8')
             #创建邮件发送服务器SMTP对象

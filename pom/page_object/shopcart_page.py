@@ -51,14 +51,13 @@ class ShopCartPage(BasePage):
     def input_number(self, txt):
         #获取数量元素
         numbers = self.locatorMore(self.number)
-        # numbers[self.index].clear() #无头模式下不行
-        # numbers[self.index].send_keys('2') #无头模式下不生效
+        numbers[self.index].clear()
+        numbers[self.index].send_keys(txt)
 
-        # js执行器
-        # js = f'$("[type=number]")[{self.index}].value=2)'
-        js = "arguments[0].value = 2"
-        # 用js的方法页面看上去修改
-        self.driver.execute_script(js, numbers[self.index])
+        # # js执行器
+        # js = "arguments[0].value = 2"
+        # # 用js的方法页面看上去修改
+        # self.driver.execute_script(js, numbers[self.index])
 
     # 点击删除
     def click_delPrd(self):

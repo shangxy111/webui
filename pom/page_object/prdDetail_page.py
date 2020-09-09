@@ -8,9 +8,6 @@ from pom.common.options import Options
 from pom.page_object.login_page import LoginPage
 from selenium.webdriver.common.by import By
 
-from pom.page_object.shopcart_page import ShopCartPage
-
-
 class PrdDetailPage(BasePage) :
 
    def __init__(self, driver , id):
@@ -43,25 +40,27 @@ class PrdDetailPage(BasePage) :
         #依次选择产品规格属性
         for el in els :
             sleep(1)
-            self.driver.execute_script("arguments[0].click();", el)
-            # el.click()
+            # self.driver.execute_script("arguments[0].click();", el)
+            el.click()
 
 
     #输入产品数量
    def input_number(self, text):
        el =self.locator(self.number)
+       el.clear()
+       el.send_keys(text)
+
        #js执行器
-       js = 'function clean(){ ' \
-            'document.getElementById("text_box").value ="";} ' \
-            'clean();'
-       self.driver.execute_script(js, el)
-       # el.clear()
-       # el.send_keys(text)
-       js2= 'function getValue() {' \
-            'document.getElementById("text_box").value = 2;' \
-            '}' \
-            'getValue();'
-       self.driver.execute_script(js2, el)
+       # js = 'function clean(){ ' \
+       #      'document.getElementById("text_box").value ="";} ' \
+       #      'clean();'
+       # self.driver.execute_script(js, el)
+
+       # js2= 'function getValue() {' \
+       #      'document.getElementById("text_box").value = 2;' \
+       #      '}' \
+       #      'getValue();'
+       # self.driver.execute_script(js2, el)
 
     #点击加入购物车按钮
    def click_cartButton(self):
@@ -71,18 +70,7 @@ class PrdDetailPage(BasePage) :
    def assert_ele(self):
        try:
            #定位"加入成功"提示元素(无头模式下定位不到该元素)
-           self.eleWait(self.successFlg)
-           #无头模式下找不到这个元素
-           # js = 'function change(){var prompt = document.getElementById("common-prompt"); prompt.removeAttribute("style");}' \
-           #      'change();'
-           # print(self.driver.execute_script(js))
-           # 切换到弹出框
-           # web_alert = self.driver.switch_to_alert()
-           # #打印弹窗信息
-           # print(web_alert.text)
-
-           #到购物车界面查看产品去断言
-           return True
+           return self.eleWait(self.successFlg)
        except Exception as error:
            self.logger.error(f'商品详情页发生异常：{error}')
            return False
