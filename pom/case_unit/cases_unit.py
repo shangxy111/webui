@@ -40,7 +40,7 @@ class CasesUnit(unittest.TestCase):
     # 用例流程一：登录
     @data(['jade008', '123456'])
     @unpack
-    @BeautifulReport.add_test_img('test_1_error')
+    @BeautifulReport.add_test_img('test_1')
     def test_1(self, username, pwd):
         # 页面对象在实例化的时候都需要传递一个driver，不同的driver会执行不同的操作
         lp = LoginPage(self.driver, LoginPage.url)
