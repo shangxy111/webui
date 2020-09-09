@@ -38,7 +38,7 @@ class CasesUnit(unittest.TestCase):
         2. 将这个driver传到第二个页面，执行登录后才能执行的操作
     '''
     # 用例流程一：登录
-    @data(['jade', 'jade620595'])
+    @data(['jade008', '123456'])
     @unpack
     @BeautifulReport.add_test_img('test_1_error')
     def test_1(self, username, pwd):
