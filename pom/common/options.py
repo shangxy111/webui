@@ -19,6 +19,9 @@ class Options:
         prefs["profile.password_manager_enabled"] = False
         options.add_experimental_option("prefs", prefs)
 
+        #liunx服务下让Chrome在root权限下跑
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         # 无头模式： 启动浏览器进程，但是不会显示出来
         options.add_argument('--headless')
         # 无头模式下窗体最大化(设置窗体的分辨率，无头模式下出错通过截图来定位问题)
